@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group 1 · Weeks 1–5 QRCODE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f0e8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .qr-card {
+            max-width: 500px;
+            width: 90%;
+            background: white;
+            border: 3px solid #222;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.2);
+            padding: 1.8rem 2rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .group-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #1d3b5c;
+            border-bottom: 3px dashed #aaa;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.8rem;
+            font-family: 'Impact', 'Arial Black', 'Courier New', sans-serif;
+            word-break: keep-all;
+        }
+
+        .week-line {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin: 0.5rem 0 1.2rem 0;
+            color: #2c3e50;
+            background: #fdeacb;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 2px solid #b47c5e;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .qr-container {
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        #qrcode {
+            border: 4px solid black;
+            width: 200px;
+            height: 200px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #qrcode img {
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-card">
+        <div class="qr-container">
+            <div id="qrcode"></div>
+        </div>
+        
+        <div class="group-title">GROUP 1</div>
+
+        <div class="week-line">WEEK 1, 2, 3, 4, 5</div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const targetLink = "https://h1.nu/1plb1";
+            const qrCodeContainer = document.getElementById('qrcode');
+            qrCodeContainer.innerHTML = '';
+            
+            const qrCode = new QRCode(qrCodeContainer, {
+                text: targetLink,
+                width: 192,
+                height: 192,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        });
+
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+            if (w < 2 * r) r = w / 2;
+            if (h < 2 * r) r = h / 2;
+            this.moveTo(x + r, y);
+            this.lineTo(x + w - r, y);
+            this.quadraticCurveTo(x + w, y, x + w, y + r);
+            this.lineTo(x + w, y + h - r);
+            this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            this.lineTo(x + r, y + h);
+            this.quadraticCurveTo(x, y + h, x, y + h - r);
+            this.lineTo(x, y + r);
+            this.quadraticCurveTo(x, y, x + r, y);
+            this.closePath();
+            return this;
+        };
+    </script>
+</body>
+</html>
