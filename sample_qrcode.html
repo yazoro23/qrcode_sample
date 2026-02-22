@@ -78,35 +78,6 @@
             height: 100%;
             image-rendering: pixelated;
         }
-
-        .download-btn {
-            background: #fdeacb;
-            border: 3px solid #b47c5e;
-            color: #2c3e50;
-            padding: 12px 24px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 15px 0 10px;
-            transition: all 0.2s ease;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 40px;
-        }
-
-        .download-btn:hover {
-            background: #b47c5e;
-            color: white;
-            border-color: #2c3e50;
-            transform: translateY(-2px);
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-        }
-
-        .download-btn:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
     </style>
 </head>
 <body>
@@ -118,8 +89,6 @@
         <div class="group-title">GROUP 1</div>
 
         <div class="week-line">WEEK 1, 2, 3, 4, 5</div>
-
-        <button class="download-btn" id="downloadBtn">⬇️ DOWNLOAD QR</button>
 
     </div>
 
@@ -138,64 +107,6 @@
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.M
-            });
-
-            document.getElementById('downloadBtn').addEventListener('click', function() {
-                const qrImage = qrCodeContainer.querySelector('img');
-                
-                if (qrImage) {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    
-                    canvas.width = 250;
-                    canvas.height = 320;
-                    
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    ctx.drawImage(qrImage, 25, 20, 200, 200);
-                    
-                    ctx.strokeStyle = '#000000';
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(25, 20, 200, 200);
-
-                    ctx.font = 'bold 28px Impact, Arial Black, sans-serif';
-                    ctx.fillStyle = '#1d3b5c';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('GROUP 1', canvas.width/2, 250);
-                    
-                    ctx.beginPath();
-                    ctx.setLineDash([5, 3]);
-                    ctx.moveTo(30, 265);
-                    ctx.lineTo(220, 265);
-                    ctx.strokeStyle = '#aaa';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                    
-                    ctx.setLineDash([]); 
-                    
-                    ctx.fillStyle = '#fdeacb';
-                    ctx.beginPath();
-                    ctx.roundRect(35, 275, 180, 35, 20);
-                    ctx.fill();
-                    
-                    ctx.strokeStyle = '#b47c5e';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                    
-                    ctx.font = 'bold 18px Courier New, monospace';
-                    ctx.fillStyle = '#2c3e50';
-                    ctx.fillText('WEEK 1, 2, 3, 4, 5', canvas.width/2, 300);
-                    
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = canvas.toDataURL('image/png');
-                    downloadLink.download = 'group1-qrcode.png';
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                } else {
-                    alert('QR Code image not found!');
-                }
             });
         });
 
